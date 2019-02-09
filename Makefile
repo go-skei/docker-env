@@ -13,7 +13,7 @@ $(DHPARAMS): | $(SSLDIR)
 	openssl dhparam -out $(DHPARAMS) 2048
 
 $(SSLKEY) $(SSLCERT): | $(SSLDIR)
-	openssl req -newkey rsa:2048 -nodes -config openssl.cnf -keyout $(SSLKEY) -x509 -days 365 -out $(SSLCERT)
+	openssl req -newkey rsa:2048 -nodes -keyout $(SSLKEY) -x509 -days 365 -out $(SSLCERT)
 
 $(SSLDIR):
 	mkdir -p $(SSLDIR)
