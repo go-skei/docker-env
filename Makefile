@@ -1,15 +1,19 @@
 # Dir containing makefile.
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-DHPARAMS=$(ROOT_DIR)/nginx/ssl/dhparam.pem
-SSLKEY=$(ROOT_DIR)/nginx/ssl/self-signed.key
-SSLCERT=$(ROOT_DIR)/nginx/ssl/self-signed.crt
+SSLDIR=$(ROOT_DIR)/nginx/ssl
+DHPARAMS=$(SSLDIR)/dhparam.pem
+SSLKEY=$(SSLDIR)/self-signed.key
+SSLCERT=$(SSLDIR)/self-signed.crt
 
 .PHONY: nginx
 nginx: | $(DHPARAMS) $(SSLKEY) $(SSLCERT)
 
-$(DHPARAMS):
+$(DHPARAMS): | $(SSLDIR)
 	openssl dhparam -out $(DHPARAMS) 2048
 
-$(SSLKEY) $(SSLCERT):
+$(SSLKEY) $(SSLCERT): | $(SSLDIR)
 	openssl req -newkey rsa:2048 -nodes -config openssl.cnf -keyout $(SSLKEY) -x509 -days 365 -out $(SSLCERT)
+
+$(SSLDIR):
+	mkdir -p $(SSLDIR)
