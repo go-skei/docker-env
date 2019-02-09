@@ -1,0 +1,23 @@
+version: "3.5"
+
+networks:
+  buildnet:
+    name: buildnet
+    external: true
+
+volumes:
+  skei_data:
+    driver: local
+
+services:
+  skei:
+    container_name: skei
+    image: skei/skei:dev
+    restart: always
+    networks:
+      - buildnet
+    volumes:
+      - skei_data:/data
+    ports:
+      - "3000:3000"
+      - "222:22"
