@@ -1,3 +1,4 @@
 data/certbot
+acme.json
 acme.json.bak
 *.swp
