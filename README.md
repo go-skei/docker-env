@@ -27,6 +27,4 @@ Run Skei in a docker container. Use another Docker container running nginx to fo
 ### Run Skei containers
 
 1. Clone the repository: `git clone https://github.com/go-skei/docker-env`.
-1. From the repostiroy root, run: `make nginx`.
-1. Start nginx container: `cd nginx && docker-compose up -d && cd ..`.
-1. Start skei container: `cd skei && docker-compose up -d && cd ..`.
+1. From the repository root, run: `docker-compose up -d`.
